@@ -1,4 +1,4 @@
-package com.aravelo.passwordvalidator.app.models;
+package com.aravelo.passwordvalidator.app.domain.models;
 
 public class Validator {
 
