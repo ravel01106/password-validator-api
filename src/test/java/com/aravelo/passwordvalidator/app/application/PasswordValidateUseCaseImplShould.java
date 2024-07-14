@@ -38,4 +38,13 @@ public class PasswordValidateUseCaseImplShould {
     assertEquals(false, resultPasswordValidator.isValid());
     assertEquals("The length has to be longer than 8 characters", resultPasswordValidator.getErrorMessage());
   }
+
+  @Test
+  void notPermitPasswordWhenItDoesNotHaveUppercase() {
+    String password = "comida1234_";
+    ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
+
+    assertEquals(false, resultPasswordValidator.isValid());
+    assertEquals("The password must have at least one uppercase", resultPasswordValidator.getErrorMessage());
+  }
 }
