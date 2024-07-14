@@ -12,7 +12,11 @@ public class ResultPasswordValidator {
   public ResultPasswordValidator(boolean isValid, String errorMessage){
     this.isValid = isValid;
     this.errorMessage = errorMessage;
+  }
 
+  public ResultPasswordValidator(boolean isValid){
+    this.isValid = isValid;
+    this.errorMessage = "";
   }
 
   public boolean isValid() {
