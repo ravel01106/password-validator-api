@@ -11,10 +11,14 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
   @Override
   public ResultPasswordValidator validatePassword(String password, Validator validator) {
-    if (password.length() >= 8){
+    if (hasMoreThanEightCharacters(password, validator)){
       return new ResultPasswordValidator(true);
     }
-    return new ResultPasswordValidator(false, "the length has to be longer than 8 characters");
+    return new ResultPasswordValidator(false, "The length has to be longer than 8 characters");
+  }
+
+  private boolean hasMoreThanEightCharacters(String password, Validator validator) {
+    return password.length() >= validator.getLenghtValid();
   }
 
 }

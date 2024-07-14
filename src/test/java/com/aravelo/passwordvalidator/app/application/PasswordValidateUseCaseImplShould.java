@@ -36,5 +36,6 @@ public class PasswordValidateUseCaseImplShould {
     ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
 
     assertEquals(false, resultPasswordValidator.isValid());
+    assertEquals("The length has to be longer than 8 characters", resultPasswordValidator.getErrorMessage());
   }
 }
