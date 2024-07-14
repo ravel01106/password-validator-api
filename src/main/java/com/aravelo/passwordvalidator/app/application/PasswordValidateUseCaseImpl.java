@@ -20,9 +20,15 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
       resultPasswordValidator.setErrorMessage("The length has to be longer than 8 characters");
 
     }
+
     if (!hasUppercase(password)){
       resultPasswordValidator.setValid(false);
       resultPasswordValidator.setErrorMessage("The password must have at least one uppercase");
+    }
+
+    if (!hasLowerCase(password)){
+      resultPasswordValidator.setValid(false);
+      resultPasswordValidator.setErrorMessage("The password must have at least one lowercase");
     }
 
     return resultPasswordValidator;
@@ -34,6 +40,12 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
   private boolean hasUppercase(String password){
     Pattern uppercasePattern = Pattern.compile("[A-Z]");
+    Matcher uppercaseMatcher = uppercasePattern.matcher(password);
+    return uppercaseMatcher.find();
+  }
+
+  private boolean hasLowerCase(String password){
+    Pattern uppercasePattern = Pattern.compile("[a-z]");
     Matcher uppercaseMatcher = uppercasePattern.matcher(password);
     return uppercaseMatcher.find();
   }

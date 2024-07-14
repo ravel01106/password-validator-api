@@ -47,4 +47,13 @@ public class PasswordValidateUseCaseImplShould {
     assertEquals(false, resultPasswordValidator.isValid());
     assertEquals("The password must have at least one uppercase", resultPasswordValidator.getErrorMessage());
   }
+
+  @Test
+  void notPermitPasswordWhenItDoesNotHaveLowercase() {
+    String password = "COMIDA1234_";
+    ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
+
+    assertEquals(false, resultPasswordValidator.isValid());
+    assertEquals("The password must have at least one lowercase", resultPasswordValidator.getErrorMessage());
+  }
 }
