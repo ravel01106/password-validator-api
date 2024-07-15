@@ -18,6 +18,7 @@ public class PasswordValidateUseCaseImplShould {
   // Not permit a password when it doesn't have a number
   // Not permit a password when it doesn't have underscore
   // Permit a password when there are no conditions in the validator
+  // Get all error messages when password is invalid
 
   @Autowired
   PasswordValidateUseCaseImpl passwordValidateUseCaseImpl;
@@ -84,8 +85,20 @@ public class PasswordValidateUseCaseImplShould {
     ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validatorWithoutConditions);
     assertEquals(true, resultPasswordValidator.isValid());
     assertEquals("", resultPasswordValidator.getErrorMessage());
+  }
 
+  @Test
+  void getAllErrorMessagesWhenPasswordIsInvalid() {
+    String password = "";
+    String errorMessage = "The length has to be longer than 8 characters\n" +
+      "The password must have at least one uppercase\n" +
+      "The password must have at least one lowercase\n" +
+      "The password must have at least one number\n" +
+      "The password must have at least one underscore";
+    ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
 
+    assertEquals(false, resultPasswordValidator.isValid());
+    assertEquals(errorMessage, resultPasswordValidator.getErrorMessage());
   }
 
 }

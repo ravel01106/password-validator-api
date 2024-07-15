@@ -15,38 +15,38 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
   @Override
   public ResultPasswordValidator validatePassword(String password, Validator validator) {
     ResultPasswordValidator  resultPasswordValidator = new ResultPasswordValidator(true);
-    if (!hasMoreThanEightCharacters(password, validator)){
-      resultPasswordValidator.setValid(false);
-      resultPasswordValidator.setErrorMessage("The length has to be longer than 8 characters");
+    String errorMessage = "";
 
+    errorMessage += checkLengthValid(password, validator);
+    errorMessage += checkUppercases(password, validator);
+    errorMessage += checkLowercases(password, validator);
+    errorMessage += checkNumbers(password, validator);
+    errorMessage += checkUnderscores(password, validator);
+
+    if (!errorMessage.isEmpty()){
+      errorMessage = errorMessage.substring(0, (errorMessage.length() - 1));
+      resultPasswordValidator.setValid(false);
     }
 
-    if (!hasUppercase(password) && validator.isContainsUpperCase()){
-      resultPasswordValidator.setValid(false);
-      resultPasswordValidator.setErrorMessage("The password must have at least one uppercase");
-    }
-
-    if (!hasLowerCase(password) && validator.isContainsLowerCase()){
-      resultPasswordValidator.setValid(false);
-      resultPasswordValidator.setErrorMessage("The password must have at least one lowercase");
-    }
-
-    if (!hasNumber(password) && validator.isContainsNumber()){
-      resultPasswordValidator.setValid(false);
-      resultPasswordValidator.setErrorMessage("The password must have at least one number");
-    }
-
-    if (!hasUnderscore(password) && validator.isContainUnderscore()){
-      resultPasswordValidator.setValid(false);
-      resultPasswordValidator.setErrorMessage("The password must have at least one underscore");
-    }
+    resultPasswordValidator.setErrorMessage(errorMessage);
 
     return resultPasswordValidator;
   }
 
+
   private boolean hasMoreThanEightCharacters(String password, Validator validator) {
     return password.length() >= validator.getLenghtValid();
   }
+
+
+  private String checkLengthValid(String password, Validator validator){
+    String errorMessage = "";
+    if (!hasMoreThanEightCharacters(password, validator)){
+      errorMessage = "The length has to be longer than " + validator.getLenghtValid() + " characters\n";
+    }
+    return errorMessage;
+  }
+
 
   private boolean hasUppercase(String password){
     Pattern uppercasePattern = Pattern.compile("[A-Z]");
@@ -54,11 +54,31 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
     return uppercaseMatcher.find();
   }
 
+
+  private String checkUppercases(String password, Validator validator){
+    String errorMessage = "";
+    if (!hasUppercase(password) && validator.isContainsUpperCase()){
+      errorMessage = "The password must have at least one uppercase\n";
+    }
+    return errorMessage;
+  }
+
+
   private boolean hasLowerCase(String password){
     Pattern uppercasePattern = Pattern.compile("[a-z]");
     Matcher uppercaseMatcher = uppercasePattern.matcher(password);
     return uppercaseMatcher.find();
   }
+
+
+  private String checkLowercases(String password, Validator validator){
+    String errorMessage = "";
+    if (!hasLowerCase(password) && validator.isContainsLowerCase()){
+      errorMessage = "The password must have at least one lowercase\n";
+    }
+    return errorMessage;
+  }
+
 
   private boolean hasNumber(String password){
     Pattern uppercasePattern = Pattern.compile("[0-9]");
@@ -66,10 +86,30 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
     return uppercaseMatcher.find();
   }
 
+
+  private String checkNumbers(String password, Validator validator){
+    String errorMessage = "";
+    if (!hasNumber(password) && validator.isContainsNumber()){
+      errorMessage = "The password must have at least one number\n";
+    }
+    return errorMessage;
+  }
+
+
   private boolean hasUnderscore(String password){
     Pattern uppercasePattern = Pattern.compile("_");
     Matcher uppercaseMatcher = uppercasePattern.matcher(password);
     return uppercaseMatcher.find();
   }
+
+
+  private String checkUnderscores(String password, Validator validator){
+    String errorMessage = "";
+    if (!hasUnderscore(password) && validator.isContainUnderscore()){
+      errorMessage = "The password must have at least one underscore\n";
+    }
+    return errorMessage;
+  }
+
 
 }
