@@ -9,7 +9,11 @@ public class Validator {
   private boolean containUnderscore;
 
   public Validator(){
-
+    lenghtValid = 0;
+    containUnderscore = false;
+    containsLowerCase = false;
+    containsNumber = false;
+    containUnderscore = false;
   }
 
   public Validator(Integer lenghtValid, boolean containsUpperCase, boolean containsLowerCase, boolean containsNumber,

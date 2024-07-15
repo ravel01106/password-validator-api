@@ -21,22 +21,22 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
     }
 
-    if (!hasUppercase(password)){
+    if (!hasUppercase(password) && validator.isContainsUpperCase()){
       resultPasswordValidator.setValid(false);
       resultPasswordValidator.setErrorMessage("The password must have at least one uppercase");
     }
 
-    if (!hasLowerCase(password)){
+    if (!hasLowerCase(password) && validator.isContainsLowerCase()){
       resultPasswordValidator.setValid(false);
       resultPasswordValidator.setErrorMessage("The password must have at least one lowercase");
     }
 
-    if (!hasNumber(password)){
+    if (!hasNumber(password) && validator.isContainsNumber()){
       resultPasswordValidator.setValid(false);
       resultPasswordValidator.setErrorMessage("The password must have at least one number");
     }
 
-    if (!hasUnderscore(password)){
+    if (!hasUnderscore(password) && validator.isContainUnderscore()){
       resultPasswordValidator.setValid(false);
       resultPasswordValidator.setErrorMessage("The password must have at least one underscore");
     }
