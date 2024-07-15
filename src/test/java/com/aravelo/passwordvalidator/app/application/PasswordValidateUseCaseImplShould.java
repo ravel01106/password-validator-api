@@ -65,4 +65,13 @@ public class PasswordValidateUseCaseImplShould {
     assertEquals(false, resultPasswordValidator.isValid());
     assertEquals("The password must have at least one number", resultPasswordValidator.getErrorMessage());
   }
+
+  @Test
+  void notPermitPasswordWhenItDoesNotHaveUnderscore() {
+    String password = "Comida1234";
+    ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
+
+    assertEquals(false, resultPasswordValidator.isValid());
+    assertEquals("The password must have at least one underscore", resultPasswordValidator.getErrorMessage());
+  }
 }

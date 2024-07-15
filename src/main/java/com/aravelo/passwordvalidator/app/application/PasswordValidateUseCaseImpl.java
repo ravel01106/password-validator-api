@@ -36,6 +36,11 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
       resultPasswordValidator.setErrorMessage("The password must have at least one number");
     }
 
+    if (!hasUnderscore(password)){
+      resultPasswordValidator.setValid(false);
+      resultPasswordValidator.setErrorMessage("The password must have at least one underscore");
+    }
+
     return resultPasswordValidator;
   }
 
@@ -57,6 +62,12 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
   private boolean hasNumber(String password){
     Pattern uppercasePattern = Pattern.compile("[0-9]");
+    Matcher uppercaseMatcher = uppercasePattern.matcher(password);
+    return uppercaseMatcher.find();
+  }
+
+  private boolean hasUnderscore(String password){
+    Pattern uppercasePattern = Pattern.compile("_");
     Matcher uppercaseMatcher = uppercasePattern.matcher(password);
     return uppercaseMatcher.find();
   }
