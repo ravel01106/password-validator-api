@@ -15,13 +15,7 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
   @Override
   public ResultPasswordValidator validatePassword(String password, Validator validator) {
     ResultPasswordValidator  resultPasswordValidator = new ResultPasswordValidator(true);
-    String errorMessage = "";
-
-    errorMessage += checkLengthValid(password, validator);
-    errorMessage += checkUppercases(password, validator);
-    errorMessage += checkLowercases(password, validator);
-    errorMessage += checkNumbers(password, validator);
-    errorMessage += checkUnderscores(password, validator);
+    String errorMessage = obtainErrorMessage(password, validator);
 
     if (!errorMessage.isEmpty()){
       errorMessage = errorMessage.substring(0, (errorMessage.length() - 1));
@@ -31,6 +25,18 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
     resultPasswordValidator.setErrorMessage(errorMessage);
 
     return resultPasswordValidator;
+  }
+
+  private String obtainErrorMessage(String password, Validator validator) {
+    String errorMessage = "";
+
+    errorMessage += checkLengthValid(password, validator);
+    errorMessage += checkUppercases(password, validator);
+    errorMessage += checkLowercases(password, validator);
+    errorMessage += checkNumbers(password, validator);
+    errorMessage += checkUnderscores(password, validator);
+
+    return errorMessage;
   }
 
 
