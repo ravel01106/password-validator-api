@@ -31,6 +31,11 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
       resultPasswordValidator.setErrorMessage("The password must have at least one lowercase");
     }
 
+    if (!hasNumber(password)){
+      resultPasswordValidator.setValid(false);
+      resultPasswordValidator.setErrorMessage("The password must have at least one number");
+    }
+
     return resultPasswordValidator;
   }
 
@@ -46,6 +51,12 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
   private boolean hasLowerCase(String password){
     Pattern uppercasePattern = Pattern.compile("[a-z]");
+    Matcher uppercaseMatcher = uppercasePattern.matcher(password);
+    return uppercaseMatcher.find();
+  }
+
+  private boolean hasNumber(String password){
+    Pattern uppercasePattern = Pattern.compile("[0-9]");
     Matcher uppercaseMatcher = uppercasePattern.matcher(password);
     return uppercaseMatcher.find();
   }
