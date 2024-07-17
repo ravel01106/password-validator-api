@@ -2,6 +2,7 @@ package com.aravelo.passwordvalidator.app.infrastructure.controllers;
 
 import static org.mockito.Mockito.when;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +35,19 @@ public class PasswordValidatorControllerShould {
 
   @Test
   void permitPasswordWhenMeetAllTheConditions() throws Exception{
-    // given
     String password = "Pepe56789_";
     String url = "/app/validate/" + password;
     Validator validator = new Validator(6, true, true, true, true);
-
-    // when
+    ResultPasswordValidator resultPasswordValidator = new ResultPasswordValidator(true);
     when(passwordValidatedUseCase.validatePassword(password, validator))
-      .thenReturn(new ResultPasswordValidator(true));
+      .thenReturn(resultPasswordValidator);
 
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(url)
       .contentType(MediaType.APPLICATION_JSON)
       .content(objectMapper.writeValueAsString(validator)))
       .andExpect(MockMvcResultMatchers.status().isOk())
-      .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
-      .andExpect(MockMvcResultMatchers.jsonPath("$[0].isValid").value("true"))
-      .andExpect(MockMvcResultMatchers.jsonPath("$[0].errorMessage").value(""));
+      .andExpect(MockMvcResultMatchers.jsonPath("$").value(resultPasswordValidator));
 
 
   }

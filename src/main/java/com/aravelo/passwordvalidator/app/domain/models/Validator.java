@@ -10,10 +10,10 @@ public class Validator {
 
   public Validator(){
     lenghtValid = 0;
-    containUnderscore = false;
     containsLowerCase = false;
     containsNumber = false;
     containUnderscore = false;
+    containsUpperCase = false;
   }
 
   public Validator(Integer lenghtValid, boolean containsUpperCase, boolean containsLowerCase, boolean containsNumber,
