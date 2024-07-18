@@ -2,7 +2,6 @@ package com.aravelo.passwordvalidator.app.infrastructure.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +26,14 @@ public class PasswordValidatorController {
   ResponseEntity<ResultPasswordValidator> validatePassword(
     @PathVariable("password") String password,
     @RequestBody Validator validator){
+
     try {
       ResultPasswordValidator resultPasswordValidator = passwordValidatedUseCase.validatePassword(password, validator);
       return new ResponseEntity<ResultPasswordValidator>(resultPasswordValidator, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
   }
 
 
