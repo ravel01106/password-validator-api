@@ -26,6 +26,7 @@ public class HandlerExceptionControllerShould {
     this.mockMvc.perform(post("/app/validate/aaaa")
     .contentType(MediaType.APPLICATION_JSON))
     .andExpect(status().isBadRequest())
+    .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
     .andExpect(jsonPath("$.error").value("The body is incomplete !!!"))
     .andExpect(jsonPath("$.errorType").value("INCOMPLETE_BODY"));
 
@@ -37,7 +38,8 @@ public class HandlerExceptionControllerShould {
     this.mockMvc.perform(post("/app/validate")
     .contentType(MediaType.APPLICATION_JSON))
     .andExpect(status().isNotFound())
-    .andExpect(jsonPath("$.error").value("this path does not exist !!!"))
+    .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+    .andExpect(jsonPath("$.error").value("This path does not exist !!!"))
     .andExpect(jsonPath("$.errorType").value("FAIL_PATH"));
 
   }

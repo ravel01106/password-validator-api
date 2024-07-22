@@ -9,7 +9,6 @@ public class ErrorDTO {
   private ErrorTypes errorType;
 
   public ErrorDTO() {
-    this.errorType = ErrorTypes.UNIDENTIFIED_ERROR;
   }
 
   public ErrorDTO(String error, Integer status, String message, ErrorTypes errorType) {
