@@ -43,4 +43,27 @@ public class PasswordValidatorControllerShould {
 
   }
 
+  @Test
+  void doNotPermitPasswordIfDoesNotMeetTheConditions() throws Exception{
+    String password = "aaa";
+    String url = "/app/validate/{password}";
+    Validator validator = new Validator(6, true, true, true, true);
+    String errorMessage = "The length has to be longer than 6 characters\n" +
+      "The password must have at least one uppercase\n" +
+      "The password must have at least one number\n" +
+      "The password must have at least one underscore";
+
+    String validatorJson = objectMapper.writeValueAsString(validator);
+
+    this.mockMvc
+      .perform(post(url, password)
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(validatorJson))
+      .andExpect(status().isOk())
+      .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+      .andExpect(jsonPath("$.valid").value(false))
+      .andExpect(jsonPath("$.errorMessage").value(errorMessage));
+
+  }
+
 }
