@@ -27,12 +27,8 @@ public class PasswordValidatorController {
     @PathVariable("password") String password,
     @RequestBody Validator validator){
 
-    try {
       ResultPasswordValidator resultPasswordValidator = passwordValidatedUseCase.validatePassword(password, validator);
       return new ResponseEntity<ResultPasswordValidator>(resultPasswordValidator, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
   }
 
