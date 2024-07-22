@@ -14,9 +14,9 @@ import com.aravelo.passwordvalidator.app.domain.ports.ErrorTypes;
 public class HandlerExceptionController {
 
   @ExceptionHandler(HttpMessageNotReadableException.class)
-  ResponseEntity<ErrorDTO> incompleteBodyException(HttpMessageNotReadableException exception){
-    ErrorDTO errorDTO = new ErrorDTO("The body is incomplete !!!", HttpStatus.BAD_REQUEST.value(),
-    exception.getMessage(), ErrorTypes.INCOMPLETE_BODY);
+  ResponseEntity<ErrorDTO> emptyBodyException(HttpMessageNotReadableException exception){
+    ErrorDTO errorDTO = new ErrorDTO("The body is empty !!!", HttpStatus.BAD_REQUEST.value(),
+    exception.getMessage(), ErrorTypes.EMPTY_BODY);
     return new ResponseEntity<ErrorDTO>(errorDTO, HttpStatus.BAD_REQUEST);
   }
 

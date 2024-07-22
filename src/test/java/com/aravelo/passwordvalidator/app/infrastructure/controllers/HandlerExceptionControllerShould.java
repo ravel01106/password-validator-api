@@ -14,21 +14,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class HandlerExceptionControllerShould {
-  // Throw error message when send an incomplete body
+  // Throw error message when send an empty body
   // Throw error message when access the wrong path
 
   @Autowired
   MockMvc mockMvc;
 
   @Test
-  void throwErrorMessageWhenSendAnIncompleteBody() throws Exception {
+  void throwErrorMessageWhenSendAnEmptyBody() throws Exception {
 
     this.mockMvc.perform(post("/app/validate/aaaa")
     .contentType(MediaType.APPLICATION_JSON))
     .andExpect(status().isBadRequest())
     .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-    .andExpect(jsonPath("$.error").value("The body is incomplete !!!"))
-    .andExpect(jsonPath("$.errorType").value("INCOMPLETE_BODY"));
+    .andExpect(jsonPath("$.error").value("The body is empty !!!"))
+    .andExpect(jsonPath("$.errorType").value("EMPTY_BODY"));
 
   }
 
