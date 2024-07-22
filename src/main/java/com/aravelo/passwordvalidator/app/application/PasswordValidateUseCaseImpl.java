@@ -40,14 +40,14 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
   }
 
 
-  private boolean hasMoreThanEightCharacters(String password, Validator validator) {
+  private boolean hasEqualOrMoreThanLengthValid(String password, Validator validator) {
     return password.length() >= validator.getLenghtValid();
   }
 
 
   private String checkLengthValid(String password, Validator validator){
     String errorMessage = "";
-    if (!hasMoreThanEightCharacters(password, validator)){
+    if (!hasEqualOrMoreThanLengthValid(password, validator)){
       errorMessage = "The length has to be longer than " + validator.getLenghtValid() + " characters\n";
     }
     return errorMessage;
