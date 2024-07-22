@@ -12,7 +12,7 @@ import com.aravelo.passwordvalidator.app.domain.models.Validator;
 public class PasswordValidateUseCaseImplShould {
 
   // Permit a password when meet all the conditions
-  // Not permit a password when it doesn't have more than eight characters
+  // Not permit a password when it doesn't have more than the minimum length
   // Not permit a password when it doesn't have uppercase
   // Not permit a password when it doesn't have lowercase
   // Not permit a password when it doesn't have a number
@@ -34,7 +34,7 @@ public class PasswordValidateUseCaseImplShould {
   }
 
   @Test
-  void notPermitPasswordWhenItDoesNotHaveMoreThanEightCharacters() {
+  void notPermitPasswordWhenItDoesNotHaveMoreThanTheMinimumLength() {
     String password = "Co1_";
     ResultPasswordValidator resultPasswordValidator = passwordValidateUseCaseImpl.validatePassword(password, validator);
 
