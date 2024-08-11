@@ -2,35 +2,35 @@ package com.aravelo.passwordvalidator.app.domain.models;
 
 public class Validator {
 
-  private Integer lenghtValid;
+  private Integer lengthValid;
   private boolean containsUpperCase;
   private boolean containsLowerCase;
   private boolean containsNumber;
-  private boolean containUnderscore;
+  private boolean containsUnderscore;
 
   public Validator(){
-    lenghtValid = 0;
+    lengthValid = 0;
     containsLowerCase = false;
     containsNumber = false;
-    containUnderscore = false;
+    containsUnderscore = false;
     containsUpperCase = false;
   }
 
   public Validator(Integer lenghtValid, boolean containsUpperCase, boolean containsLowerCase, boolean containsNumber,
       boolean containUnderscore) {
-    this.lenghtValid = lenghtValid;
+    this.lengthValid = lenghtValid;
     this.containsUpperCase = containsUpperCase;
     this.containsLowerCase = containsLowerCase;
     this.containsNumber = containsNumber;
-    this.containUnderscore = containUnderscore;
+    this.containsUnderscore = containUnderscore;
   }
 
-  public Integer getLenghtValid() {
-    return lenghtValid;
+  public Integer getLengthValid() {
+    return lengthValid;
   }
 
-  public void setLenghtValid(Integer lenghtValid) {
-    this.lenghtValid = lenghtValid;
+  public void setLengthValid(Integer lenghtValid) {
+    this.lengthValid = lenghtValid;
   }
 
   public boolean isContainsUpperCase() {
@@ -57,12 +57,12 @@ public class Validator {
     this.containsNumber = containsNumber;
   }
 
-  public boolean isContainUnderscore() {
-    return containUnderscore;
+  public boolean isContainsUnderscore() {
+    return containsUnderscore;
   }
 
-  public void setContainUnderscore(boolean containUnderscore) {
-    this.containUnderscore = containUnderscore;
+  public void setContainsUnderscore(boolean containUnderscore) {
+    this.containsUnderscore = containUnderscore;
   }
 
 }

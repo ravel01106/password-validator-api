@@ -41,14 +41,14 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
 
   private boolean hasEqualOrMoreThanLengthValid(String password, Validator validator) {
-    return password.length() >= validator.getLenghtValid();
+    return password.length() >= validator.getLengthValid();
   }
 
 
   private String checkLengthValid(String password, Validator validator){
     String errorMessage = "";
     if (!hasEqualOrMoreThanLengthValid(password, validator)){
-      errorMessage = "The length has to be longer than " + validator.getLenghtValid() + " characters\n";
+      errorMessage = "The length has to be longer than " + validator.getLengthValid() + " characters\n";
     }
     return errorMessage;
   }
@@ -111,7 +111,7 @@ public class PasswordValidateUseCaseImpl implements PasswordValidatedUseCase{
 
   private String checkUnderscores(String password, Validator validator){
     String errorMessage = "";
-    if (!hasUnderscore(password) && validator.isContainUnderscore()){
+    if (!hasUnderscore(password) && validator.isContainsUnderscore()){
       errorMessage = "The password must have at least one underscore\n";
     }
     return errorMessage;
